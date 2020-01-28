@@ -82,7 +82,7 @@ for i in tqdm_notebook(range(1, len(bigquery_res['granule_id'].values))):
     if i == 0:
         imgs = concat_bands(bigquery_res['granule_id'].values[i])
     else:
-        imgs = np.concatenate([res, concat_bands(bigquery_res['granule_id'].values[i])])
+        imgs = np.concatenate([imgs, concat_bands(bigquery_res['granule_id'].values[i])])
 
 
 # A smooth value is added to avoid ZeroDivision error!

@@ -19,6 +19,16 @@ bigquery_res['sensing_time'] = pd.to_datetime(bigquery_res['sensing_time'])
 bigquery_res = bigquery_res[bigquery_res['cloud_cover']<75]
 bigquery_res = bigquery_res.reset_index(drop=True)
 
+for name in bigquery_res['granule_id'].values:
+    if name=='L1C_T53HPA_A004418_20180110T005319':
+        nbr = expand_nbr(name=name)
+    else:
+        nbr = np.concatenate([nbr, expand_nbr(name=name)],0)
+
+dnbr = np.zeros((108,1200,1200,1))
+for i in range(108):]
+    dnbr[i,:] = nbr[i+1,:] - nbr[i,:]
+
 dnbr_s = dnbr[:,200:1200,100:1100,:]
 dnbr_n = dnbr[:,0:1000,100:1100,:]
 dnbr_w = dnbr[:,100:1100,0:1000,:]
@@ -33,7 +43,7 @@ dnbr_list  = [dnbr_s, dnbr_n, dnbr_w, dnbr_e, dnbr_nw, dnbr_sw, dnbr_ne, dnbr_se
 suffix_list= ['south','north','west','east','northwest','southwest','northeast','southeast']
 
 
-for name in bigquery_res_s['granule_id'].values:
+for name in bigquery_res['granule_id'].values:
     if name=='L1C_T53HPA_A004418_20180110T005319':
         nbr = expand_nbr(name=name)
     else:
