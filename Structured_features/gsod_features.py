@@ -26,7 +26,12 @@ bigquery_res = bigquery_res.reset_index(drop=True)
 ### Flinders Chase's nearest weather station is at CAPE BORDA AWS with the stn_id 958050
 local_records = aus_records[aus_records['stn']==958050]
 local_records = local_records.sort_values(by='date')
-local_records_s = local_records[local_records['date'].isin(bigquery_res['sensing_time'].dt.date)]
+local_records= local_records[local_records['date'].isin(bigquery_res['sensing_time'].dt.date)]
+
+
+# visib median => 11.5; dewp median => 47.9
+local_records['slp'][local_records['slp']>9999] = local_records['slp'][local_records['slp']<9999].median()
+local_records['visib'][local_records['visib']>999] = local_records['visib'][local_records['visib']<999].median()
 
 
 ## _0: current day, _1: current day + 1 ...

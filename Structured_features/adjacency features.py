@@ -27,7 +27,7 @@ for name in bigquery_res['granule_id'].values:
 
 dnbr = np.zeros((108,1200,1200,1))
 for i in range(108):]
-    dnbr[i,:] = nbr[i+1,:] - nbr[i,:]
+    dnbr[i+1,:] = nbr[i+1,:] - nbr[i,:]
 
 dnbr_s = dnbr[:,200:1200,100:1100,:]
 dnbr_n = dnbr[:,0:1000,100:1100,:]
