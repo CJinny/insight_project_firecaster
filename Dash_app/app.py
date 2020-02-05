@@ -1,18 +1,13 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-from datetime import datetime as dt
-
+import datetime
 import numpy as np
 import pandas as pd
 import plotly.graph_objs as go
 import pandas as pd
 import geopandas as gpd
-from matplotlib import pyplot as plt
-import seaborn as sns
 import base64
-
-import flask
 import glob
 import os
 
@@ -32,9 +27,11 @@ static_image_route = './data/plot_folder/'
 
 list_of_images = [os.path.basename(x) for x in glob.glob('{}plot_*.png'.format(image_directory))]
 date_options = [*map(lambda t:t.split('_')[1].split('.')[0], list_of_images)]
-date_options = sorted(date_options)
+date_options = sorted(date_options,  reverse=True)
 
-test_png = './data/plot_folder/plot_2018-01-15.png'
+#test_png = './data/plot_folder/plot_2019-12-31.png'
+test_png = './data/plot_folder/plot_2020-01-25.png'
+
 test_base64 = base64.b64encode(open(test_png, 'rb').read()).decode('ascii')
 
 
@@ -152,16 +149,20 @@ def generate_gsod_wdsp_plot(gsod_data):
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+
+
+server = app.server
+
 app.config.suppress_callback_exceptions = True
 
 index_page = html.Div([
     dcc.Link('About', href='/page-0'),
     html.Br(),
-    dcc.Link('Australian wildfire and weather visualization', href='/page-1'),
+    dcc.Link('Satellite images and model prediction', href='/page-1'),
     html.Br(),
-    dcc.Link('Satellite images and model prediction', href='/page-2'),
+    dcc.Link('Model architecture', href='/page-2'),
     html.Br(),
-    dcc.Link('Model architecture', href='/page-3'),
+    dcc.Link('Australian wildfire and weather visualization', href='/page-3'),
     html.Br(),
     html.Br(),
 ], style={'fontSize': '120%'})
@@ -184,7 +185,7 @@ app.layout = html.Div([
 
 page_0_layout = html.Div([
                     html.Div([
-                        html.H4('Bakground', style={'font-weight': 'bold'}),
+                        html.H4('Background', style={'font-weight': 'bold'}),
                         html.P(
                             [
                                 """
@@ -225,19 +226,54 @@ page_0_layout = html.Div([
                                 html.A("Portfolio", href="https://cjinny.github.io/portfolio/"),
                             ]
                         ),
-                    ],style={'width':'46%', 'float':'left'}),
+                    ],style={'width':'44%', 'float':'left'}),
                     html.Div([
-                        html.Img(
+                            html.Img(
                             id='rgb',
                             src='data:image/png;base64,{}'.format(rgb_base64),
                             style={'height' : '50%',
                                 'width' : '50%',
-                                'float' : 'right'}
-                        )
+                                }
+                        ),
+                        
                     ]),
                 ])
 
-page_1_layout = html.Div(
+page_1_layout = html.Div([
+                    html.H3('Images and model prediction'),
+                    html.P("Out-of-fold valid-set predictions start on 2018-02-14, test-set predictions start on 2020-01-20"),
+                    #html.Br(),
+                    #html.Br(),
+                    html.H4('Select a date'),
+                    dcc.Dropdown(
+                        id='image-dropdown',
+                        options=[{'label': i, 'value': i} for i in date_options],
+                        value=date_options[0]
+                    ),
+                    html.Div([
+                        html.Img(
+                            id='image',
+                            src='data:image/png;base64,{}'.format(test_base64),
+                            style={'height' : '90%',
+                                'width' : '90%',
+                                'position' : 'relative'
+                            }
+                        ),
+                    ]),
+                    
+                ])
+
+page_2_layout = html.Div([
+                    html.Img(
+                        id='model',
+                        src='data:image/png;base64,{}'.format(model_base64),
+                        style={'height' : '200%',
+                               'width' : '200%',
+                               'position' : 'relative'}
+                    )
+                ])
+
+page_3_layout = html.Div(
                     style={'backgroundColor': 'white'},
                     children = [
                         html.Div([
@@ -250,8 +286,8 @@ page_1_layout = html.Div(
                             dcc.DatePickerRange(
                                 id="wildfire-date-range-slider",
                                 month_format='MMM Do, YY',
-                                start_date=dt(2018,1,1),
-                                end_date=dt(2020,1,16)
+                                start_date=datetime.datetime(2018,1,1),
+                                end_date=datetime.datetime(2020,1,16)
                             ),
                             html.Br(),
                             html.H6(
@@ -299,8 +335,8 @@ page_1_layout = html.Div(
                             dcc.DatePickerRange(
                                 id="gsod-range-slider",
                                 month_format='MMM Do, YY',
-                                start_date=dt(2019,12,16),
-                                end_date=dt(2020,1,16)
+                                start_date=datetime.datetime(2019,12,16),
+                                end_date=datetime.datetime(2020,1,16)
                             ),
                             
                             html.Div([
@@ -325,49 +361,10 @@ page_1_layout = html.Div(
                                 dcc.Graph(
                                     id='gsod-wdsp-plot'
                                 )
-
                             ])
 
                         ],style={'width':'45%', 'float':'right'})    
                 ])
-            
-
-page_2_layout = html.Div([
-                    html.H3('Satellite images and model prediction'),
-                    html.H4('Select a date'),
-                    html.P("Predictions start on 2018-02-14"),
-                    dcc.Dropdown(
-                        id='image-dropdown',
-                        options=[{'label': i, 'value': i} for i in date_options],
-                        value=date_options[0]
-                    ),
-                    html.Div([
-                        html.Img(
-                            id='image',
-                            src='data:image/png;base64,{}'.format(test_base64),
-                            style={'height' : '90%',
-                                'width' : '90%',
-                                'position' : 'relative'
-                            }
-                        ),
-                        
-                    ]),
-                    
-                ])
-
-page_3_layout = html.Div([
-                    html.Img(
-                        id='model',
-                        src='data:image/png;base64,{}'.format(model_base64),
-                        style={'height' : '90%',
-                               'width' : '90%',
-                               'position' : 'relative'}
-                    )
-                ])
-
-
-
-
 
 @app.callback(
     # add line plot showing maximum FRP
@@ -402,12 +399,7 @@ def update_wildfire(start_date, end_date, checklist, rangeslider):
 def update_gsod(start_date, end_date, value):
     idx = list(gsod[(gsod['date'] <= end_date) & (gsod['date'] >= start_date)].index)
     gsod_subset = gsod.iloc[idx,:]
-    #agg = gsod_subset.groupby(['name','date']).agg({'wdsp':np.mean, 'temp':np.mean})
-    #agg = agg.reset_index(drop=False)
-    #stn_names = list(agg['name'].value_counts().index)
-    #if not isinstance(value)
     
-    #print(gsod.head())
     gsod_subset2 = gsod[gsod['name'].isin(value)]
     
     return generate_gsod_fig(gsod_subset), generate_gsod_temp_plot(gsod_subset2), generate_gsod_wdsp_plot(gsod_subset2)
@@ -416,7 +408,8 @@ def update_gsod(start_date, end_date, value):
 
 @app.callback(
     dash.dependencies.Output('image', 'src'),
-    [dash.dependencies.Input('image-dropdown', 'value')])
+    [dash.dependencies.Input('image-dropdown', 'value')]
+)
 def update_image_src(value):
     image_path = static_image_route + 'plot_' + value + '.png'
     image_base64=base64.b64encode(open(image_path, 'rb').read()).decode('ascii') 
@@ -424,16 +417,9 @@ def update_image_src(value):
     return 'data:image/png;base64,{}'.format(image_base64)
 
 
-
-
-
-
-
-
-
-
 @app.callback(dash.dependencies.Output('page-content', 'children'),
-              [dash.dependencies.Input('url', 'pathname')])
+              [dash.dependencies.Input('url', 'pathname')]
+)
 def display_page(pathname):
     if pathname == '/page-0':
         return page_0_layout
@@ -446,7 +432,6 @@ def display_page(pathname):
     else:
         #pass
         return page_0_layout
-
 
 
 if __name__ == '__main__':
