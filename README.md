@@ -19,6 +19,22 @@
 
 Flinders Chase National Park, Australia is a wildlife protection area home to many endangered species. The ongoing wildfire has devastated the Park, killing [half of its native wildlife population](https://www.cbsnews.com/news/australia-fires-nasa-satellite-images-show-wildfires-destroy-kangaroo-island/). In this project, I hope to establish an early warning system to forecast impending wildfire damage on Flinders Chase National Park.
 
+### Directory Layout
+    .
+    ├── Dash_app                          # Dash web app
+        ├── assets                            # base.css
+        ├── data                              # Data used for web app
+            ├── plot_folder                       # Matplotlib plots
+        └── app.py                        # Main app file
+    ├── Image_processing                  # Satellite image processing
+        ├── jp2tif.py                       # Convert images from JP2 format to GeoTiff
+        ├── tif2array.py                    # Resize and cropping of GeoTiff to Numpy arrays
+    ├── Image_visualization               # Miscellaneous images for presentation, blog post and web apps
+    ├── Model_training                    # Jupyter notebooks (Google Colab) with data preps, model training & predictions
+    ├── SQL_queries_and_url_download      # BigQuery SQL queries to extract satellite image urls & gsod data, batch download
+    ├── Structured_features               # Adjacency feature and gsod feature generation
+    └── README.md
+
 #### Workflow Summary
 
 To build a time-series forecast model, I used data from satellite imagery from (Sentinel 2A & 2B, revisit time: 5 days) as well as NOAA global summary of the day (GSOD) weather data. The main steps of this project consists of:
@@ -40,10 +56,13 @@ To build a time-series forecast model, I used data from satellite imagery from (
   2. Model training on each fold, create out-of-fold prediction and test-set prediction (mean prediction score from 5 models).
 - **Data Visualization and Web App**
   1. Generate zone-risk prediction probability heatmap using seaborn
-  2. Generate animations etc. 
+  2. Matplotlib plots, animations, web apps.
   
  #### Results Summary
  
- I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or give false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
+I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or give false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
  
 <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/model_performance_oof_test.png" alt="" width=600>
+
+#### Step 1: SQL queries
+  
