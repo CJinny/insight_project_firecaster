@@ -42,4 +42,8 @@ To build a time-series forecast model, I used data from satellite imagery from (
   1. Generate zone-risk prediction probability heatmap using seaborn
   2. Generate animations etc. 
   
+ #### Results Summary
  
+ I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or give false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
+ 
+<img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/model_performance_oof_test.png" alt="" width=600>
