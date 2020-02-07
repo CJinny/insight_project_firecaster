@@ -8,7 +8,7 @@
 [**Portfolio**](https://github.com/CJinny/portfolio)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/frontpage_resize.gif">
+  <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/frontpage_resize.gif"> style="display: block" 
 </p>
 
 - **Summary:** Building a deep learning model to forecast bushfire damage risk on Flinders Chase National Park using satellite imagery and weather data.
