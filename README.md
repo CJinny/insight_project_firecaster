@@ -7,7 +7,7 @@
 [**Portfolio**](https://github.com/CJinny/portfolio)
 
 - **Summary:** Building a deep learning model to forecast bushfire damage risk on Flinders Chase National Park using satellite imagery and weather data.
-- **Keyword:** Time-Series Forecast, Computer Vision, Remote Sensing
+- **Keyword:** Time-Series Forecast, Computer Vision, Mixed-Data Neural Network, Remote Sensing
 - **Techniques:** Keras, LSTM, CNN, Rasterio, GDAL, OpenCV, BigQuery, Plotly, Dash, Heroku
 
 ### Project Overview
