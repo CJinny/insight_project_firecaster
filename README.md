@@ -7,9 +7,9 @@
 [**Resume**](https://drive.google.com/file/d/1XEDraiFqlYJaJL5R9kI55w_6Kfg9Nxtd/view?usp=sharing) *
 [**Portfolio**](https://github.com/CJinny/portfolio)
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/frontpage_resize.gif"> style="display: block" 
-</p>
+
+![](https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/frontpage_resize.gif)
+
 
 - **Summary:** Building a deep learning model to forecast bushfire damage risk on Flinders Chase National Park using satellite imagery and weather data.
 - **Keyword:** Time-Series Forecast, Computer Vision, Mixed-Data Neural Network, Remote Sensing
