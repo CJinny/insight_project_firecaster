@@ -15,10 +15,20 @@
 - **Keyword:** Time-Series Forecast, Computer Vision, Mixed-Data Neural Network, Remote Sensing
 - **Techniques:** Keras, LSTM, CNN, GeoPandas, Rasterio, GDAL, OpenCV, BigQuery, Plotly, Dash, Heroku
 
+
+## Table of Contents
+
+- [Project Overview](#overview)
+- [Directory Layout](#directory)
+- [Workflow Summary](#workflow)
+- [Results Summary](#results)
+
+___
 ### Project Overview
 
-Flinders Chase National Park, Australia is a wildlife protection area home to many endangered species. The ongoing wildfire has devastated the Park, killing [half of its native wildlife population](https://www.cbsnews.com/news/australia-fires-nasa-satellite-images-show-wildfires-destroy-kangaroo-island/). In this project, I hope to establish an early warning system to forecast impending wildfire damage on Flinders Chase National Park.
+Flinders Chase National Park, Australia is a wildlife protection area home to many endangered species. The ongoing wildfire has devastated the Park, killing [half of its native wildlife population](https://www.cbsnews.com/news/australia-fires-nasa-satellite-images-show-wildfires-destroy-kangaroo-island/). This project attempted to establish an early warning system to forecast impending wildfire damage on Flinders Chase National Park. The data I used included: Sentinel 2A&2B satellite imagery and NOAA GSOD weather data.
 
+___
 ### Directory Layout
     .
     ├── Dash_app                          # Dash web app
@@ -34,8 +44,8 @@ Flinders Chase National Park, Australia is a wildlife protection area home to ma
     ├── SQL_queries_and_url_download      # BigQuery SQL queries to extract satellite image urls & gsod data, batch download
     ├── Structured_features               # Adjacency feature and gsod feature generation
     └── README.md
-
-#### Workflow Summary
+___
+### Workflow Summary
 
 To build a time-series forecast model, I used data from satellite imagery from (Sentinel 2A & 2B, revisit time: 5 days) as well as NOAA global summary of the day (GSOD) weather data. The main steps of this project consists of:
 
@@ -58,7 +68,8 @@ To build a time-series forecast model, I used data from satellite imagery from (
   1. Generate zone-risk prediction probability heatmap using seaborn
   2. Matplotlib plots, animations, web apps.
   
- #### Results Summary
+___
+### Results Summary
  
 I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or give false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
  
