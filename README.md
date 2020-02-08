@@ -18,10 +18,10 @@
 
 ## Table of Contents
 
-- [Project Overview](#overview)
-- [Directory Layout](#directory)
-- [Workflow Summary](#workflow)
-- [Results Summary](#results)
+- [Project Overview](#project-overview)
+- [Directory Layout](#directory-layout)
+- [Workflow Summary](#workflow-summary)
+- [Results Summary](#results-summary)
 
 ___
 ### Project Overview
