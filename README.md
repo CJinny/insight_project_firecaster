@@ -64,5 +64,4 @@ I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre dama
  
 <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/model_performance_oof_test.png" alt="" width=600>
 
-#### Step 1: SQL queries
   
