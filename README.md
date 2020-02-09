@@ -20,8 +20,8 @@
 
 - [Project Overview](#project-overview)
 - [Directory Layout](#directory-layout)
-- [Workflow Summary](#workflow-summary)
-- [Results Summary](#results-summary)
+- [Workflow](#workflow)
+- [Results](#results)
 
 ___
 ### Project Overview
@@ -45,7 +45,7 @@ ___
     ├── Structured_features               # Adjacency feature and gsod feature generation
     └── README.md
 ___
-### Workflow Summary
+### Workflow
 
 To build a time-series forecast model, I used data from satellite imagery from (Sentinel 2A & 2B, revisit time: 5 days) as well as NOAA global summary of the day (GSOD) weather data. The main steps of this project consists of:
 
@@ -69,7 +69,7 @@ To build a time-series forecast model, I used data from satellite imagery from (
   2. Matplotlib plots, animations, web apps.
   
 ___
-### Results Summary
+### Results
  
 I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or give false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
  
