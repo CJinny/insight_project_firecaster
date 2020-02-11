@@ -50,10 +50,12 @@ ___
 To build a time-series forecast model, I used data from satellite imagery from (Sentinel 2A & 2B, revisit time: 5 days) as well as NOAA global summary of the day (GSOD) weather data. The main steps of this project consists of:
 
 - **SQL queries:** 
-  1. Write SQL queries on BigQuery (done in Kaggle notebook) to extract URL information for satellite imagery and download data from Google Cloud Program, select only images with < 75% cloud coverage. 
-  2. Write separate SQL queries to extract NOAA GSOD data (also available on BigQuery).
+  1. Write SQL queries on BigQuery (Jupyter notebook on Kaggle.com) to extract URL information for satellite imagery and download data from Google Cloud Program, select only images with < 75% cloud coverage. Results were stored in csv format.
+  2. Write SQL queries to extract NOAA GSOD data (also available on BigQuery).
 - **Data Processing:** 
   1. Convert satellite imagery data from JP2 to GeoTiff format using GDAL, resize images using OpenCV and crop a 1000 x 1000 px region.
+  ![](https://raw.githubusercontent.com/CJinny/insight_project_firecaster/blob/master/Dash_app/data/rgb_example.png)
+  
   2. For GSOD weather data, replace missing values with median, remove features with 0 variance.
 - **Data Prep and Feature Engineering**
   1. Subdivide each 1000 x 1000 region into 25 200 x 200 zone, compile images into 4-D numpy array.
@@ -67,7 +69,8 @@ To build a time-series forecast model, I used data from satellite imagery from (
 - **Data Visualization and Web App**
   1. Generate zone-risk prediction probability heatmap using seaborn
   2. Matplotlib plots, animations, web apps.
-  
+
+
 ___
 ### Results
  
