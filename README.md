@@ -87,5 +87,5 @@ ___
 I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or giving false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
  
 <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/model_performance_oof_test.png" alt="" width=600>
-<img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/metrics.png" alt="" width=600>
+<img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/metrics.png" alt="" width=500>
   
