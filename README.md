@@ -55,18 +55,20 @@ To build a time-series forecast model, I used data from satellite imagery from (
   <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Dash_app/data/rgb_example.png" alt="" width=600>
   
   2. For GSOD weather data, replace missing values with median, remove features with 0 variance. repopulate missing day weather with nearest day weather.
-- **Data Prep and Feature Engineering**
+- **Data Prep and Feature Engineering (Feature correlation shown below)**
   1. Subdivide each 1000 x 1000 region into 25 200 x 200 zones, compile images into 4-D numpy array, this is done to increase sample size and reduce image dimension.
   2. Split image data as train/valid and test based on time (2018-01-10 ~ 2020-01-15 as train/valid, 2020-01-20 ~ 2020-01-30 as test). Use KFold (K=5) method to generate train and valid set (split by zone only). The intention of the validation set was  to enable early stopping whereas the test set was to test model on independent datasets.
   3. Generate water mask using NDVI. Label burn (dNBR>0.66) areas while subtracting water mask. Count if any zone has >= 5% burn pixels => high-risk zone. 
   4. Generate adjacency features based on burn pixel % from neighbouring (8 directions) zones.
   5. Generate the series of 3 images, 3 adjacency features and 3 weather data for model training.
   
-  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/pearson_corr_black.png" alt=" width=600>
+  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/pearson_corr_black.png" alt="" width=600>
     
 - **Model Training and Predictions**
-  1. Build Keras model to incorporate series of images, series of adjacency features and series of weather data using mixed inputs (CNN and MLP), concatenate intermediate output and feed to LSTM.
-  2. Model training on each fold, create out-of-fold prediction and test-set prediction (mean prediction score from 5 models).
+  1. Build Keras model to incorporate series of images, series of adjacency features and series of weather data using mixed inputs (CNN and MLP), concatenate intermediate output and feed to LSTM, model diagram is shown below.
+  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/model_diagram.png" alt="" width=600>
+  2. Model training on each fold, create out-of-fold prediction and test-set prediction (mean prediction score from 5 models), train/valid/test strategy is shown below.
+  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/train_val_test_strategy.png" alt="" width=600>
 - **Data Visualization and Web App**
   1. Generate zone-risk prediction probability heatmap using seaborn
   2. Matplotlib plots, animations, web apps.
