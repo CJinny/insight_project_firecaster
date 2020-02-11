@@ -2,7 +2,7 @@
 ### *A Data Science project at [Insight Health Data Science](https://www.insighthealthdata.com/) by Jin Cui.*
 
 
-[**Google Slides**](https://docs.google.com/presentation/d/1h2yOoLqJH6JAufcHWqZvux6jQl7qYj33gC5rinFcX8k/edit?usp=sharing) * [**Web App**](https://docs.google.com/presentation/d/1EzvNZ0XEXELiSLZaI3wUA8zZ6JZ0jSBYzC3BHe-3ezM/edit?usp=sharing) * [**Medium**](https://medium.com/@jincui_32383/firecaster-93465e719d55) *
+[**Google Slides**](https://docs.google.com/presentation/d/1h2yOoLqJH6JAufcHWqZvux6jQl7qYj33gC5rinFcX8k/edit#slide=id.g7dd2c7fa38_3_21) * [**Web App**](http://firecaster-app.herokuapp.com/) * [**Medium**](https://medium.com/@jincui_32383/firecaster-93465e719d55) *
 [**LinkedIn**](https://www.linkedin.com/in/cjinny/) * 
 [**Resume**](https://drive.google.com/file/d/1XEDraiFqlYJaJL5R9kI55w_6Kfg9Nxtd/view?usp=sharing) *
 [**Portfolio**](https://github.com/CJinny/portfolio)
@@ -66,12 +66,17 @@ To build a time-series forecast model, I used data from satellite imagery from (
     
 - **Model Training and Predictions**
   1. Build Keras model to incorporate series of images, series of adjacency features and series of weather data using mixed inputs (CNN and MLP), concatenate intermediate output and feed to LSTM, model diagram is shown below.
+  
   <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/model_diagram.png" alt="" width=600>
+  
   2. Model training on each fold, create out-of-fold prediction and test-set prediction (mean prediction score from 5 models), train/valid/test strategy is shown below.
+  
   <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/train_val_test_strategy.png" alt="" width=600>
+  
 - **Data Visualization and Web App**
-  1. Generate zone-risk prediction probability heatmap using seaborn
-  2. Matplotlib plots, animations, web apps.
+  1. Generate zone-risk prediction probability heatmap using seaborn.
+  2. Generate Burn status (matplotlib.plt.imshow) and risk probability predictions (seaborn.heatmap) plots.
+  3. Generate interactive EDA choropleth (Plotly: go.Scattergeo) and line charts (Plotly: go.Scatter).
 
 
 ___
