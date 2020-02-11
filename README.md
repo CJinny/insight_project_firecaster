@@ -62,16 +62,18 @@ To build a time-series forecast model, I used data from satellite imagery from (
   4. Generate adjacency features based on burn pixel % from neighbouring (8 directions) zones.
   5. Generate the series of 3 images, 3 adjacency features and 3 weather data for model training.
   
+  
+  
   <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/pearson_corr_black.png" alt="" width=600>
     
 - **Model Training and Predictions**
   1. Build Keras model to incorporate series of images, series of adjacency features and series of weather data using mixed inputs (CNN and MLP), concatenate intermediate output and feed to LSTM, model diagram is shown below.
   
-  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/model_diagram.png" alt="" width=600>
+  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/model_diagram.png" alt="" width=1000>
   
   2. Model training on each fold, create out-of-fold prediction and test-set prediction (mean prediction score from 5 models), train/valid/test strategy is shown below.
   
-  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/train_val_test_strategy.png" alt="" width=600>
+  <img src="https://github.com/CJinny/insight_project_firecaster/blob/master/Image_visualization/train_val_test_strategy.png" alt="" width=1000>
   
 - **Data Visualization and Web App**
   1. Generate zone-risk prediction probability heatmap using seaborn.
@@ -82,7 +84,7 @@ To build a time-series forecast model, I used data from satellite imagery from (
 ___
 ### Results
  
-I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or give false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
+I built a mixed-data neural network (VGG16, MLP, LSTM) to forecast wildifre damage risk and trained 5 models with a custom loss function which maximizes f4 beta score (since I want to emphasize recall, or the ability to predict a fire damage as opposed to precision, or giving false alarm). The following confusion matrix shows the validation (out-of-fold) and test set model performance.
  
 <img src="https://raw.githubusercontent.com/CJinny/insight_project_firecaster/master/Image_visualization/model_performance_oof_test.png" alt="" width=600>
 
