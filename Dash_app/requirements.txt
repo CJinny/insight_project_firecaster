@@ -19,7 +19,7 @@ numpy==1.17.0
 pandas==0.25.0
 python-dateutil==2.8.0
 pytz==2019.2
-PyYAML==5.1.2
+PyYAML==5.4
 geopandas==0.5.1
 wheel==0.24.0
 datetime
